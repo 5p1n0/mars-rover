@@ -102,7 +102,7 @@ Ogni package è suddiviso a sua volta in diversi layer:
 
 Il layer `ui` ha una struttura ad albero, ciò comporta che ogni sub-componente può importare solo componenti figli.
 
-Ho adottato questa struttura gerarchica per prevenire complessita durante i refactor.
+Ho adottato questa struttura gerarchica per prevenire complessità durante i refactor.
 
 Da tale vincolo deriva l'importanza del layer `shared`, poiché ogni elemento presente in esso, è condivisibile senza vincoli gerarchici.
 
