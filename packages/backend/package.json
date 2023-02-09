@@ -1,0 +1,9 @@
+{
+  "name": "@mr/backend",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "ts-node-dev index.ts",
+    "type-check": "tsc --noEmit",
+    "prod": "ts-node --transpile-only index.ts"
+  }
+}

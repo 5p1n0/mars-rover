@@ -1,0 +1,5 @@
+{
+  "name": "@mr/frontend-minimap-rover",
+  "version": "0.1.0",
+  "main": "./index.tsx"
+}

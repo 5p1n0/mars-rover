@@ -1,0 +1,69 @@
+{
+  "name": "mars-rover",
+  "private": true,
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "packages/**",
+    "react-app/**"
+  ],
+  "scripts": {
+    "backend:start": "cd packages/backend && npm run dev",
+    "backend:prod": "cd packages/backend && npm run prod",
+    "start": "cd react-app && npm run dev",
+    "build": "cd react-app && npm run build",
+    "type-check": "cd packages/backend && npm run type-check && cd ../../react-app && npm run type-check",
+    "prettify": "prettier --write .",
+    "lint": "eslint ./packages ./react-app --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path .gitignore",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@fontsource/orbitron": "^4.5.10",
+    "@fontsource/space-grotesk": "^4.5.12",
+    "@fontsource/vt323": "^4.5.10",
+    "@vitest/coverage-c8": "^0.28.1",
+    "express": "^4.18.2",
+    "jest-styled-components": "^7.1.1",
+    "jsdom": "^21.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10",
+    "react-router-dom": "^6.4.2",
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.3",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/node": "^16.11.68",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@types/react-test-renderer": "^18.0.0",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "@vitejs/plugin-react": "^3.0.0",
+    "cypress": "^12.4.0",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "happo-cypress": "^4.0.1",
+    "happo-e2e": "^2.1.1",
+    "happo.io": "^8.3.1",
+    "prettier": "2.8.2",
+    "react-dial-knob": "^1.3.0",
+    "react-test-renderer": "^18.2.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0",
+    "vitest": "^0.27.1"
+  }
+}

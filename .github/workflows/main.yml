@@ -1,0 +1,62 @@
+name: Unit and visual regression tests (vitest - cypress - happo) | Custom scripts (eslint - prettier - tsc)
+on:
+  push:
+    branches:
+      - master
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Node setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Run Cypress
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          command-prefix: 'happo-e2e -- npx'
+        env:
+          HAPPO_API_KEY: ${{ secrets.HAPPO_API_KEY }}
+          HAPPO_API_SECRET: ${{ secrets.HAPPO_API_SECRET }}
+
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+
+      - name: Install NPM dependencies 
+        uses: bahmutov/npm-install@v1
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+        with:
+          install-command: npm i --legacy-peer-deps
+
+      - name: Run Vitest
+        run: npm test
+
+  scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+
+      - name: Install NPM dependencies 
+        uses: bahmutov/npm-install@v1
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Run Prettier
+        run: npm run prettify
+
+      - name: Run Tsc
+        run: npm run type-check
+
+      - name: Run Eslint
+        run: npm run lint
+     
