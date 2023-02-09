@@ -1,9 +1,6 @@
-<p align='center'>
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="347" height="62"><style>
-@import url("https://fonts.googleapis.com/css?family=Orbitron:400");
-</style>
-<defs/><g><text fill="#e7612e" stroke="none" font-family="Orbitron" font-size="48px" font-style="normal" font-weight="normal" text-decoration="normal" x="25.619999885559082" y="31" text-anchor="start" dominant-baseline="central">Mars Rover</text><text fill="#cccccc" stroke="none" font-family="Arial" font-size="48px" font-style="normal" font-weight="bold" text-decoration="normal" x="340.04001331329346" y="31" text-anchor="start" dominant-baseline="central"/></g></svg>
-</p>
+# Mars Rover
+
+> https://mr-prod.onrender.com/
 
 ## How to run
 
