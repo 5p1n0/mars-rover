@@ -1,5 +1,5 @@
 # Report
-Relazione sul progetto
+Project Report
 
 ## Tech
 
@@ -35,107 +35,106 @@ Relazione sul progetto
 
 ***
 
-Come framework principale ho utilizzato [Express](https://expressjs.com).
+I used [Express](https://expressjs.com) as the main framework.
 
-Avendoci già lavorato in precedenza, ne ho apprezzato la flessibilità e il minimalismo.
+Having already worked with it previously, I appreciated its flexibility and minimalism.
 
-Per gestire la comunicazione tra client e server, ho deciso di utilizzare delle WebSocket, poiché:
-- sono bidirezionali
-- a bassa latenza
-- basate su eventi
+To manage communication between client and server, I decided to use WebSockets, because:
+- they are bidirectional
+- low latency
+- event-based
 
-Per l'implementazione, ho utilizzato [Socket.io](https://socket.io), per la presenza di feature come la riconnessione e il buffering dei pacchetti, utili nel caso di disconnessioni.
+For the implementation, I used [Socket.io](https://socket.io), for the presence of features such as reconnection and packet buffering, useful in case of disconnections.
 
-Per strutturare il backend mi sono basato sui [suggerimenti](https://socket.io/docs/v4/server-application-structure/) presenti in Socket.io, riguardo gli event handler delle socket suddivisi per file.
+To structure the backend, I based myself on the [recommendations](https://socket.io/docs/v4/server-application-structure/) present in Socket.io, regarding socket event handlers divided by file.
 
 ## Design
 
 ***
 
-Per il design dell'app ho cercato di attenermi al tema dell'esplorazione spaziale basandomi su questi [artwork](https://thehungryjpeg.com/product/3700215-control-panels-spaceship).
+For the app design, I tried to adhere to the theme of space exploration based on these [artwork](https://thehungryjpeg.com/product/3700215-control-panels-spaceship).
 
 ## Frontend
 
 ***
 
-Come framework principali ho utilizzato [React](https://reactjs.org) e [Styled-Components](https://styled-components.com) (CSS-in-JS).
+I used [React](https://reactjs.org) and [Styled-Components](https://styled-components.com) (CSS-in-JS) as the main frameworks.
 
 ## Structure
 
 ***
 
-Il progetto è strutturato come monorepo.
+The project is structured as a monorepo.
 
-La stuttura a monorepo prevede di suddividere il progetto in feature indipendenti dentro a package.
+The monorepo structure involves dividing the project into independent features within packages.
 
-> i package sono raggruppati per tipologia
+> packages are grouped by type
 
 ```
 packages/
-├── backend    - package del backend
-├── common     - package condivisi
-└── frontend   - package del frontend
+├── backend    - backend package
+├── common     - shared packages
+└── frontend   - frontend package
 ```
 
-> i package del `frontend` sono raggruppati per feature
+> frontend packages are grouped by feature
 
 ```
 packages/frontend
-├── core      - package principali che comprendono costanti globali o componenti chiave
-├── deck      - package relativi ai comandi del rover
-└── minimap   - package della minimappa 
+├── core      - main packages that include global constants or key components
+├── deck      - packages related to rover commands
+└── minimap   - minimap package
 ```
 
-Ogni package è suddiviso a sua volta in diversi layer:
+Each package is further divided into several layers:
   - `data`:
-    - principalmente contiene provider per i sub-componenti interni al package
+    - mainly contains providers for sub-components internal to the package
   - `shared`:
-    - contiene componenti, hook, util e costanti
-    - tutti gli elementi presenti in questo layer sono condivisibili fra tutti i layer
+    - contains components, hooks, utilities and constants
+    - all elements present in this layer are shareable across all layers
   - `ui`:
-    - contiene sub-componenti
-    - ogni sub-componente, può usare elementi provenienti da `shared`
+    - contains sub-components
+    - each sub-component can use elements from `shared`
 
 <p align='center'>
   <img alt='Layers' width='500' src='https://www.developerway.com/assets/react-project-structure/simple-package-diagram.png'>
 </p>
 
-Il layer `ui` ha una struttura ad albero, ciò comporta che ogni sub-componente può importare solo componenti figli.
+The `ui` layer has a tree structure, which means that each sub-component can only import child components.
 
-Ho adottato questa struttura gerarchica per prevenire complessità durante i refactor.
+I adopted this hierarchical structure to prevent complexity during refactoring.
 
-Da tale vincolo deriva l'importanza del layer `shared`, poiché ogni elemento presente in esso, è condivisibile senza vincoli gerarchici.
+From this constraint derives the importance of the `shared` layer, since every element present in it is shareable without hierarchical constraints.
 
 <p align='center'>
   <img alt='Layers' width='500' src='https://www.developerway.com/assets/react-project-structure/tree-with-shared.png'>
 </p>
 
+The downside of this approach is that it makes the project structure very nested.
 
-Il lato negativo di questo approccio è che rende la struttura del progetto molto annidata.
+However, I tried to flatten it by omitting layer folders where possible:
 
-Ho comunque cercato di appiattirla omettendo le cartelle dei layer dove possibile:
-
-> in questo package è presente solo un sub-componente per `ui`
+> this package only has one sub-component for `ui`
 
 ```
 packages/frontend/minimap/grid
-├── area - sub-componente
+├── area - sub-component
 ├── index.tsx
 └── package.json
 ```
 
-Questa è la fonte principale su cui mi sono basato per strutturare il progetto come monorepo:
+This is the reference that I used for structuring the project as a monorepo:
 https://www.developerway.com/posts/react-project-structure
 
 ## Testing
 
 ***
 
-Come framework principale per testare il progetto ho utilizzato [Vitest](https://vitest.dev).
+I used [Vitest](https://vitest.dev) as the main testing framework.
 
-Ho utilizzato unit test principalmente per le `util` dei package e snapshot per i componenti, cercado di ottenere un buon livello di coverage.
+I used unit tests mainly for package `utilities` and snapshots for components, trying to achieve a good coverage level.
 
-> ogni package ha al suo interno più file di test
+> each package has multiple test files within it
 
 ```
 packages/frontend/minimap/rover
@@ -149,14 +148,172 @@ packages/frontend/minimap/rover
 └── styles.tsx
 ```
 
-Ho aggiunto anche dei test in CI, per trovare differenze e regressioni dell'app sui principali browser, utilizzando [Cypress](https://docs.cypress.io) e [Happo](https://happo.io).
+I also added tests in CI to find differences and regressions on major browsers, using [Cypress](https://docs.cypress.io) and [Happo](https://happo.io).
 
 
 ## CI
 
 ***
 
-Ho impostato [GitHub Actions](https://github.com/features/actions) per automare linting, formatting e testing per ogni push request.
+I set up [GitHub Actions](https://github.com/features/actions) to automate linting, formatting and testing for every push request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
